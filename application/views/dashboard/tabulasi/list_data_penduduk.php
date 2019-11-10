@@ -25,7 +25,7 @@
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
-                                <a href="" onClick="insertProduct()" data-toggle="modal" data-target="#insert"style="text-decoration:none; color: #010;" ><i style="cursor:pointer;" class="material-icons">add_circle</i> <span style="position:relative;bottom:4px;" class="icon-name">Tambah Data</span></a>
+                                <a href="<?= base_url() ?>/dashboard/tambah_penerima/" style="text-decoration:none; color: #010;" ><i style="cursor:pointer;" class="material-icons">add_circle</i> <span style="position:relative;bottom:4px;" class="icon-name">Tambah Data</span></a>
                                 </li>
                             </ul>
                             

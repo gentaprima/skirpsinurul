@@ -68,7 +68,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="<?= base_url(); ?>dashboard/list_order">
+                        <a href="#">
                             <i class="material-icons">library_books</i>
                             <span>Laporan</span>
                         </a>
