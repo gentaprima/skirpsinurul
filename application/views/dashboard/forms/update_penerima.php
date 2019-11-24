@@ -3,7 +3,7 @@
             <div class="block-header">
                 <ol class="breadcrumb breadcrumb-bg-cyan">
                     <li><a href="<?= base_url(); ?>dashboard/"><i class="material-icons">home</i> Home</a></li>
-                    <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> Tambah Penerima Bansos </a></li>
+                    <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> Update Penerima Bansos </a></li>
                 </ol>
             </div>
 
@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Tambah Penerima Bansos
+                                Update Penerima Bansos
                                 <!-- <small>With floating label</small> -->
                             </h2>
                             <ul class="header-dropdown m-r--5">
@@ -35,50 +35,49 @@
                             </ul>
                         </div>
                         <div class="body">
-                            <form method="post" action="<?= base_url() ?>dashboard/prosesTambahPenerima/">
+                            <?php foreach($data_penerima as $row){ ?>
+                            <form method="post" action="<?= base_url() ?>dashboard/prosesUpdate/">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="nik" id="nik" class="form-control">
+                                        <input type="text" name="nik" value="<?= $row['nik']; ?>" readonly id="nik" class="form-control">
                                         <label class="form-label">NIK</label>
                                     </div>
                                 </div>
 
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" id="nama" name="nama" class="form-control">
+                                        <input type="text" id="nama" value="<?= $row['nama']; ?>" name="nama" class="form-control">
                                         <label class="form-label">Nama</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" id="umur" name="umur" class="form-control">
+                                        <input type="number" id="umur" value="<?= $row['umur'] ;?>" name="umur" class="form-control">
                                         <label class="form-label">Umur</label>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" id="jml_tanggungan" min="1" name="jml_tanggungan" class="form-control">
+                                        <input type="number" id="jml_tanggungan" value="<?= $row['tanggungan'] ;?>" min="1" name="jml_tanggungan" class="form-control">
                                         <label class="form-label">Jumlah Tanggungan</label>
                                     </div>
                                 </div>
 
                                 <div class="form-group form-float">
-                                            <div class="form-line">
-                                                <select name="penghasilan" id="penghasilan" class="form-control show-tick">
-                                                    <option value="">-- Pilih Jenis Penghasilan --</option>
-                                                    <option value="> 5 juta ">> 5 juta  </option>
-                                                    <option value="2 Juta - 4 Juta"> 2 Juta - 4 Juta</option> 
-                                                    <option value="500 Ribu - 2 Juta">500 Ribu - 2 Juta </option> 
-                                                </select>
-                                               
-                                            </div>
-                                        </div>
-                            
+                                    <div class="form-line">
+                                        <input type="text" id="penghasilan" value="<?= $row['penghasilan'] ;?>"  min="1" name="penghasilan" class="form-control">
+                                        <label class="form-label">Penghasilan</label>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="<?= $row['id_bansos']; ?>" name="id_bansos">
+                                <input type="hidden" value="<?= $row['id_detail']; ?>" name="id_detail">
+                                <input type="hidden" value="<?= $row['tahun']; ?>" name="tahun">
                                
                                 <div class="form-group form-float">
                                             <div class="form-line">
                                                 <select name="status_pd" id="status_pd" class="form-control show-tick">
+                                                    <option value="<?= $row['pendidikan'] ?>"><?= $row['pendidikan'] ?></option>
                                                     <option value="">-- Pilih Jenis Pendidikan --</option>
                                                     <option value="SD/SDLB">SD/SDLB </option>
                                                     <option value="Paket A  M. Ibtidaiyah"> Paket A  M. Ibtidaiyah</option> 
@@ -96,6 +95,7 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <select name="status_peker" id="status_peker" class="form-control show-tick">
+                                            <option value="<?= $row['status_pekerjaan'] ?>"><?= $row['status_pekerjaan'] ?></option>
                                             <option value="">-- Pilih Jenis Pekerjaan --</option>
                                             <option value="Berusaha sendiri">Berusaha sendiri</option> 
                                             <option value="Berusaha dibantu buruh tidak tetap/tidak dibayar">Berusaha dibantu buruh tidak tetap/tidak dibayar</option>
@@ -111,6 +111,7 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <select name="status_pk" id="status_pk" class="form-control show-tick">
+                                            <option value="<?= $row['status_perkawinan'] ?>"><?= $row['status_perkawinan'] ?></option>
                                             <option value="">-- Pilih Status Perkawinan --</option>
                                             <option value="Kawin">Kawin</option>
                                             <option value="Belum Kawin">Belum Kawin</option>
@@ -122,6 +123,9 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <select name="kelurahan" id="kelurahan" class="form-control show-tick">
+                                            <?php foreach($data_penerima as $row){ ?>
+                                           <option value="<?= $row['id_kelurahan'] ?>"><?= $row['nama_kelurahan'] ?></option>
+                                            <?php } ?>
                                             <option value="">-- Pilih Kelurahan --</option>
                                             <?php foreach($kelurahan as $row){ ?>
                                                 <option value="<?= $row['id_kelurahan']; ?>"><?= $row['nama_kelurahan']; ?></option>
@@ -130,14 +134,13 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                <?php foreach($data_penerima as $bantuan){ ?>
                                 <label for="">Jenis Bantuan Sosial</label>
-                                <!--  Awal Row -->
                                 <div class="row clearfix">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="checkbox" value="" name="kip" id="kip" class="filled-in">
+                                                <input type="checkbox" <?php if($bantuan['kip'] == 1){echo "checked";} ?>  value="1" name="kip" id="kip" class="filled-in">
                                                 <label for="kip">Kartu Indonesia Pintar</label>
                                             </div>
                                         </div>
@@ -145,7 +148,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="checkbox" value="1" name="bsp" id="bsp" class="filled-in">
+                                                <input type="checkbox" <?php if($bantuan['bsp'] == 1){echo "checked";} ?> value="1" name="bsp" id="bsp" class="filled-in">
                                                 <label for="bsp">Bantuan Sosial Pangan</label>
                                             </div>
                                         </div>
@@ -154,7 +157,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="checkbox" value="1" name="pbi_jk" id="pbi-jk" class="filled-in">
+                                                <input type="checkbox" <?php if($bantuan['pbi_jk'] == 1){echo "checked";} ?> value="1" name="pbi_jk" id="pbi-jk" class="filled-in">
                                                 <label  for="pbi-jk">Program Bantuan Iuran - Jaminan Kesehatan </label>
                                             </div>
                                         </div>
@@ -162,17 +165,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="checkbox" value=1 name="pkh" id="pkh" class="filled-in">
+                                                <input type="checkbox" <?php if($bantuan['pkh'] == 1){echo "checked";} ?> value=1 name="pkh" id="pkh" class="filled-in">
                                                 <label for="pkh">Program Keluarga Harapan </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                                 <!-- Akhir Row -->
                                 <br>
-                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Tambah</button>
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Update</button>
                                 <button type="reset" class="btn btn-default m-t-15 waves-effect">Reset</button>
                             </form>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

@@ -4,10 +4,21 @@ require_once  $_SERVER['DOCUMENT_ROOT'].'/skripsinurul/vendor/autoload.php';
 use Phpml\Classification\NaiveBayes;
 use Phpml\Regression\LeastSquares;
 use Phpml\Dataset\CsvDataset;
+use Phpml\Metric\Accuracy;
+use Phpml\Metric\ClassificationReport;
+use Phpml\CrossValidation\RandomSplit;
+use Phpml\Dataset\ArrayDataset;
+
 
 
     class Iseng extends CI_Controller{
 
+        public function __construct()
+        {
+            parent::__construct();
+            $this->load->model('ModelPenduduk');
+            $this->load->model('ModelBansos');
+        }
         
 
         public function index(){
@@ -82,4 +93,81 @@ use Phpml\Dataset\CsvDataset;
 
         }
        
+        public function checkAccuracy(){
+            $dataTarget = $this->ModelPenduduk->readAllTarget();
+            $dataSamples = $this->ModelPenduduk->readAllData();
+            $targetTo1D = array();
+            $j =0;
+            foreach($dataTarget as $target){
+                foreach($target as $i){
+                    $targetTo1D[$j] = $i;
+                    $j++;  
+                }
+            }
+            $predictLabels;
+            $correct = 0;
+            $count = count($dataSamples);
+            for($i=0;$i<$count;$i++){
+                $classifier = new NaiveBayes();
+                $classifier->train($dataSamples, $targetTo1D);
+                $predict = $classifier->predict([$dataSamples[$i]]);
+                $predictLabels[$i] = $predict[0];
+                if($predict[0] == $targetTo1D[$i]){
+                    $correct++;
+                }
+            }
+            $report = new ClassificationReport($targetTo1D, $predictLabels);
+            $score = Accuracy::score($targetTo1D, $predictLabels);
+            $precision=  $report->getPrecision();
+            $recall=  $report->getRecall();
+            $f1score =  $report->getF1score();
+            $support =  $report->getSupport();
+            $average=  $report->getAverage();
+            $score = $score*100;
+            echo "Score :  $score , yang Benar : $correct , Dari Jumlah Data : $count<br>";
+            //recall
+            print_r($recall);
+            
+            //f1score 
+            print_r($f1score);
+            //average =
+        
+            print_r($average);
+        }
+
+        public function randomSplitCrossValidation(){
+            
+            $dataTarget = $this->ModelPenduduk->readAllTarget();
+            $dataSamples = $this->ModelPenduduk->readAllData();
+            //print_r($dataSamples);die;
+            $targetTo1D = array();
+            $j =0;
+            foreach($dataTarget as $target){
+                foreach($target as $i){
+                    $targetTo1D[$j] = $i;
+                    $j++;  
+                }
+            }
+            $dataset = new ArrayDataset($dataSamples, $targetTo1D);  
+            $seed = rand();
+            $dataset = new RandomSplit($dataset, 0.3, $seed);
+            //train group
+            $trainSample=  $dataset->getTrainSamples();
+            $trainLabels=  $dataset->getTrainLabels();
+
+            // test group
+           $testSampel =  $dataset->getTestSamples();
+           $testLabels = $dataset->getTestLabels();
+            $correct = 0;
+           $classifier = new NaiveBayes();
+           $classifier->train($trainSample, $trainLabels);
+           for($i = 0 ;$i<count($testSampel);$i++){
+             $predict = $classifier->predict([$testSampel[$i]]);
+             if($predict[0] == $testLabels[0]){
+              $correct++;
+             }
+             echo($predict[0].$testSampel[$i][0].$testSampel[$i][1].$testSampel[$i][2].$testSampel[$i][3]."<br>");
+           }
+           echo "Jumlah Data Benar : ".$correct;
+        }
     }

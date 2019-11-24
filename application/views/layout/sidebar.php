@@ -12,7 +12,7 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <!-- <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li> -->
                             
                             <li role="separator" class="divider"></li>
                             <li><a href="<?= base_url(); ?>login/logout/"><i class="material-icons">input</i>Sign Out</a></li>
@@ -67,8 +67,8 @@
                             <span>Tabulasi Data</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#">
+                    <li class="<?php if(!empty($active_laporan)){echo $active_laporan;} ?>">
+                        <a href="<?= base_url() ?>dashboard/laporan/">
                             <i class="material-icons">library_books</i>
                             <span>Laporan</span>
                         </a>

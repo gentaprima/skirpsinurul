@@ -6,8 +6,7 @@
             <div class="block-header">
                 <ol class="breadcrumb breadcrumb-bg-cyan">
                     <li><a href="<?= base_url(); ?>dashboard/"><i class="material-icons">home</i> Home</a></li>
-                    <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> Data Master</a></li>
-                    <li class="active"><i class="material-icons">archive</i> Data Product</li>
+                    <li class="active"><i class="material-icons">archive</i> Tabulasi Data</li>
                 </ol>
             </div>
             <?php if($this->session->flashdata('text')){ ?>
@@ -21,7 +20,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Data Product
+                                Data Penduduk
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -43,7 +42,9 @@
                                             <th>Pendidikan</th>
                                             <th>Pekerjaan</th>
                                             <th>Penghasilan</th>
+                                            <th>Tahun</th>
                                             <th>Label</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -56,7 +57,9 @@
                                             <th>Pendidikan</th>
                                             <th>Pekerjaan</th>
                                             <th>Penghasilan</th>
+                                            <th>Tahun</th>
                                             <th>Label</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -69,8 +72,18 @@
                                             <td><?= $row['status_perkawinan']; ?></td>
                                             <td><?= $row['pendidikan']; ?></td>
                                             <td><?= $row['status_pekerjaan']; ?></td>
-                                            <td>Rp. <?= number_format($row['penghasilan'],2,",","."); ?></td>
+                                            <td> <?= $row['penghasilan']; ?></td>
+                                            <td> <?= $row['tahun']; ?></td>
                                             <td><?= $row['labels']; ?></td>
+                                            <td>
+                                                <center>
+                                                <a href="<?= base_url() ?>dashboard/update_penduduk/<?= $row['nik']; ?>/"> <button class="btn bg-cyan btn-circle waves-effect waves-circle waves-float" style="margin-bottom:4px;">
+                                                    <i class="material-icons">create</i> 
+                                                </button>
+                                                </a>
+                                                <button onClick="deletePenduduk('<?= $row['id_detail'] ?>','<?= $row['nik']; ?>')" data-toggle="modal" data-target="#DELETE" type="button" class="btn bg-default btn-circle waves-effect waves-circle waves-float"><i class="material-icons">delete</i> </button>
+                                                </center>
+                                            </td>
                                         </tr>
                                        <?php } ?>
                                     </tbody>
@@ -87,7 +100,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content modal-col-teal">
                         <div class="modal-header" style="border-bottom:2px solid #fff;">
-                            <h4 class="modal-title" style="margin-bottom:10px;"  id="defaultModalLabel">Hapus Data Product</h4>
+                            <h4 class="modal-title" style="margin-bottom:10px;"  id="defaultModalLabel">Hapus Data Penduduk</h4>
                             
                         </div>
                         <div class="modal-body"  style="background-color:;">

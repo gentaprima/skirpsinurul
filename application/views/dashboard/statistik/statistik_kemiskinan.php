@@ -1,3 +1,4 @@
+
 <section class="content">
         <div class="container-fluid">
             <div class="block-header">
@@ -34,5 +35,4 @@
                 <!-- #END# Bar Chart -->
             </div>
 
-            
     </section>

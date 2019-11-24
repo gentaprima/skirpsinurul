@@ -71,6 +71,12 @@ var checkMap = document.getElementById("check");
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(mymap);
+     mymap.touchZoom.disable();
+            mymap.doubleClickZoom.disable();
+            mymap.scrollWheelZoom.disable();
+            mymap.boxZoom.disable();
+            mymap.keyboard.disable();
+             mymap.dragging.disable();
     
     mymap.scrollWheelZoom.disable();   
     }else{
@@ -109,25 +115,25 @@ var checkMap = document.getElementById("check");
 
     function showAlert(kelurahan){
         if(kelurahan == "Kelurahan Jatinegara Kaum"){
-            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/jatinegara.png"></img><br><p style="font-weight:800">Kelurahan Jatinegara Kaum</p><p>Jumlah Kemiskinan : </p>';
+            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/jatinegara.png"></img><br><p style="font-weight:800">Kelurahan Jatinegara Kaum</p><p>Jumlah Mampu : <?= 23 . "%"; ?> </p><p>Jumlah Tidak Mampu : <?= 50 . "%"; ?> </p><p>Jumlah Kurang Mampu : <?= 27 . "%"; ?> </p>';
             return html;
         }else if(kelurahan == "Kelurahan Cipinang"){
-            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/cipinang.png"></img><br><p style="font-weight:800">Kelurahan Cipinang</p><p>Jumlah Kemiskinan : </p>';
+            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/cipinang.png"></img><br><p style="font-weight:800">Kelurahan Cipinang</p><p>Jumlah Mampu : <?= $percentCiMampu . "%"; ?> </p><p>Jumlah Tidak Mampu : <?= $percentCiTm . "%"; ?> </p><p>Jumlah Kurang Mampu : <?= $percentCiKm . "%"; ?> </p>';
             return html;
         }else if(kelurahan == "Kelurahan Pisangan Timur"){
-            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/pisangantimur.png"></img><br><p style="font-weight:800">Kelurahan Pisangan Timur</p><p>Jumlah Kemiskinan : </p>';
+            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/pisangantimur.png"></img><br><p style="font-weight:800">Kelurahan Pisangan Timur</p><p>Jumlah Mampu : <?= $percentPisanganMampu . "%"; ?> </p><p>Jumlah Tidak Mampu : <?= $percentPisanganTm . "%"; ?> </p><p>Jumlah Kurang Mampu : <?= $percentPisanganKm . "%"; ?> </p>';
             return html;
         }else if(kelurahan == "Kelurahan Jati"){
-            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/jati.png"></img><br><p style="font-weight:800">Kelurahan Kayu Jati</p><p>Jumlah Kemiskinan : </p>';
+            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/jati.png"></img><br><p style="font-weight:800">Kelurahan Kayu Jati</p><p>Jumlah Mampu : <?= $percentJatiMampu . "%"; ?> </p><p>Jumlah Tidak Mampu : <?= $percentJatiTm . "%"; ?> </p><p>Jumlah Kurang Mampu : <?= $percentJatiKm . "%"; ?> </p>';
             return html;
         }else if(kelurahan == "Kelurahan Rawamangun"){
-            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/rawamangun.png"></img><br><p style="font-weight:800">Kelurahan Rawamangun</p><p>Jumlah Kemiskinan : </p>';
+            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/rawamangun.png"></img><br><p style="font-weight:800">Kelurahan Rawamangun</p><p>Jumlah Mampu : <?= $percentRawamangunMampu . "%"; ?> </p><p>Jumlah Tidak Mampu : <?=  $percentRawamangunTm. "%"; ?> </p><p>Jumlah Kurang Mampu : <?= $percentRawamangunKm . "%"; ?> </p>';
             return html;
         }else if(kelurahan == "Kelurahan Pulogadung"){
-            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/pulogadung.png"></img><br><p style="font-weight:800">Kelurahan Pulogadung</p><p>Jumlah Kemiskinan : </p>';
+            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/pulogadung.png"></img><br><p style="font-weight:800">Kelurahan Pulogadung</p><p>Jumlah Mampu : <?= $percentPGMampu . "%"; ?> </p><p>Jumlah Tidak Mampu : <?= $percentPGTidakMampu . "%"; ?> </p><p>Jumlah Kurang Mampu : <?= $percentPGKurangMampu . "%"; ?> </p>';
             return html;
         }else if(kelurahan == "Kelurahan Kayu Putih"){
-            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/kayuputih.png"></img><br><p style="font-weight:800">Kelurahan Kayu Putih</p><p>Jumlah Kemiskinan : </p>';
+            var html = '<img width="200px" height="200px" src="<?= base_url() ?>assets/maps/leaflet/images/kayuputih.png"></img><br><p style="font-weight:800">Kelurahan Kayu Putih</p><p>Jumlah Mampu : <?= $percentKpMampu . "%"; ?> </p><p>Jumlah Tidak Mampu : <?= $percentKPTM . "%"; ?> </p><p>Jumlah Kurang Mampu : <?= $percentKpKm . "%"; ?> </p>';
             return html;
         }
     }
@@ -151,5 +157,4 @@ if(alert != null){
 }
 </script>
 </body>
-
 </html>

@@ -1896,7 +1896,7 @@
     color: #fff !important; }
 
 .bg-cyan {
-  background-color: #88D8C7 !important;
+  background-color: #4d0630 !important;
   color: #fff; }
   .bg-cyan .content .text,
   .bg-cyan .content .number {
@@ -4397,7 +4397,7 @@ section.content {
         background-color: rgba(0, 0, 0, 0.12); }
 
 .modal-col-teal {
-  background-color: #88D8C7; }
+  background-color: #4d0630; }
   .modal-col-teal .modal-body,
   .modal-col-teal .modal-title {
     color: #fff !important; }
